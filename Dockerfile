@@ -152,8 +152,6 @@ RUN apk add --no-cache \
     luarocks \
     ;
 
-#RUN apk del --no-cache libressl-*;
-#RUN apk add --no-cache openssl-dev;
 WORKDIR /usr/src
 RUN git clone -b ${NGX_PAGESPEED_TAG} \
     --recurse-submodules \
@@ -172,15 +170,8 @@ RUN wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
     gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --keyserver-options timeout=10 --recv-keys $NGINX_PGPKEY} ) && \
     gpg --trusted-key ${NGINX_PGPKEY} --verify nginx-${NGINX_VERSION}.tar.gz.asc
 
-#ARG LUAJIT_LIB=/usr/local/luajit/lib
-#ARG LUAJIT_INC=/usr/local/luajit/include/luajit-2.1
 ARG LUAJIT_LIB=/usr/lib 
 ARG LUAJIT_INC=/usr/include/luajit-2.1
-#RUN wget -c https://github.com/openresty/luajit2/archive/refs/tags/v2.1-20210510.tar.gz && \
-#RUN wget -c https://github.com/openresty/luajit2/archive/refs/tags/v2.1-20210510.tar.gz && \
-#tar xzvf v2.1-20210510.tar.gz && \
-#cd luajit2-2.1-20210510 && \
-#make install PREFIX=/usr/local/luajit
 RUN wget https://github.com/vision5/ngx_devel_kit/archive/refs/tags/v0.3.1.tar.gz && \
     tar -xzvf v0.3.1.tar.gz
 
